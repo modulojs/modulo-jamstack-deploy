@@ -1,0 +1,113 @@
+<head>
+    <title>{{ props.pagetitle }}</title>
+    <meta charset="utf8" />
+    <meta name="title" content="{{ props.pagetitle }}">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="revisit-after" content="30 days">
+
+    {# Uncomment the following to get started with SEO-friendly meta tags: #}
+    {% comment %}
+        <!-- (Note: Be sure to add the necessary props to x-Page!) -->
+        <meta name="description" content="{{ props.description }}">
+        <meta name="keywords" content="{{ props.keywords }}">
+        <meta name="language" content="{{ props.language|default:"English" }}">
+    {% endcomment %}
+
+    {% comment %}
+        Since this Component is "vanish-into-document", it's allowed to include
+        loose LINK and SCRIPT tags, which will be interpreted and built,
+        allowing you to more easily integrate existing HTML files here. E.g.:
+    {% endcomment %}
+    <link rel="stylesheet" href="/static/css/site.css" />
+</head>
+<body>
+    <nav class="page-nav container">
+        <ul>
+            {% for link in links_pages.list %}
+                <li class="{% if link.file == props.navselected %}page-li--selected{% endif %}">
+                    <a href="{{ link.file }}"
+                        title="{{ link.title }}"
+                        class="
+                            page-nav-link
+                            {% if link.file == props.navselected %}page-nav-link--selected{% endif %}
+                        ">
+                        {{ link.title|upper }}
+                    </a>
+                </li>
+            {% endfor %}
+
+            {# Show a "hidden" Admin Panel tab, only if selected #}
+            {% if props.navselected == "admin" %}
+                <li class="page-li--selected">
+                    <a class="page-nav-link page-nav-link--selected" href="/static/cms/admin/">
+                        Admin Panel
+                    </a>
+                </li>
+            {% endif %}
+
+            <div class="nav-logo">
+                <img src="/static/images/example_logo.svg" title="Site Logo" />
+            </div>
+        </ul>
+    </nav>
+
+    <div class="page-container container {% if props.showarticles %}articles-container{% endif %}">
+        <main class="page-content">
+            {% if props.navbreadcrumb %}
+                    {% for link in links_pages.list %}
+                        {% if link.file == props.navselected %}
+                            <a href="{{ link.file }}" title="{{ link.title }}" class="breadcrumb">
+                                {{ link.title }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                    <span class="breadcrumb">/</span>
+                    <a href="#" title="{{ props.pagetitle }}" class="breadcrumb breadcrumb--selected">
+                        {{ props.navbreadcrumb }}
+                    </a>
+            {% endif %}
+            <slot></slot>
+        </main>
+
+        {% if props.showarticles %}
+            <nav class="article-nav">
+                <ul>
+                    <h1>Read one of our articles</h1>
+                    {% for link in links_articles.list %}
+                        <li class="{% if link.file == props.navselected %}page-li--selected{% endif %}">
+                                <a
+                                    href="{{ link.file }}"
+                                    title="{{ link.title }}"
+                                    class="page-nav-link {% if link.file == props.navselected %}page-nav-link--selected{% endif %}"
+                                    style="background: var(--color); color: white; font-size: 1.6rem"
+                                >
+                                    <span style="min-width: 250px; display: inline-block">{{ link.title }}</span>
+                                    <span style="margin-left: 5px; font-weight: normal; font-size: 1.4rem;">
+                                        {{ link.byline }}
+                                    </span>
+                                    <span style="margin: 11px; float: right; margin-top: -18px; opacity: 0.9">
+                                        <span style="font-size: 1.1rem; font-weight: normal;">
+                                            {{ link.estimate }}
+                                        </span><br />
+                                        <span style="font-size: 1.1rem">READ MORE</span>
+                                        &raquo;
+                                    </span>
+                            </a>
+                        </li>
+                    {% endfor %}
+              </ul>
+            </nav>
+        {% endif %}
+    </div>
+
+    <footer class="page-footer">
+        &bull; {% for link in links_pages.list %}
+            <a href="{{ link.file }}">{{ link.title }}</a> &bull;
+        {% endfor %} <br />
+        &copy; {{ script.currentYear }} All Rights Reserved by Page Author
+        <!-- Feel free to delete this: -->
+        &bull; <a href="https://modulojs.org/" title="Made with Modulo.js" target="_blank">%</a>
+    </footer>
+</body>

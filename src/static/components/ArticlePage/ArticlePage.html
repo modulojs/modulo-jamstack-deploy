@@ -1,0 +1,30 @@
+{# The template used by Markdown / CMS Content pages #}
+<x-Page
+    pagetitle="{{ page.title }}"
+    showarticles="Read articles"
+    navselected="/index.html"
+    navbreadcrumb="{{ page.title }}"
+>
+
+    {# Ensure meta information is filled in #}
+    <meta name="description" content="{{ page.title }} - {{ page.subtitle }}">
+    <meta name="keywords" content="">
+    <meta name="language" content="English">
+
+    <h1 style="font-size: 3rem">{{ page.title }}</h1>
+
+    {% if page.subtitle %}
+        <h2 style="font-weight: bold; color: gray">{{ page.subtitle }}</h2>
+    {% endif %}
+
+    {% if page.author %}
+        <p>by <em>{{ page.author }}</em></p>
+        <hr />
+    {% endif %}
+
+    <div class="markdown-body">
+        {# The page.body property will be the page-body in raw HTML #}
+        {{ page.body }}
+    </div>
+
+</x-Page>

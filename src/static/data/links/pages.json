@@ -1,0 +1,16 @@
+{
+    "list": [
+        {
+            "title": "Articles",
+            "file": "/index.html"
+        },
+        {
+            "title": "About",
+            "file": "/about.html"
+        },
+        {
+            "title": "Contact",
+            "file": "/contact.html"
+        }
+    ]
+}

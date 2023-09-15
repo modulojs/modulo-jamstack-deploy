@@ -1,0 +1,171 @@
+/* Store CSS variables in :host selector, accessible to styles in Page.html */
+:host {
+    --footer-height: 100px;
+    --navbar-height: 68px;
+    --logo-width: 50px;
+    --logo-height: 50px;
+    --btn-shadow-dist: 4px;
+    --btn-shadow-dist-neg: -4px;
+    --color: indigo;
+    --color-fg: black;
+    --color-content-bg: white;
+    --color-content-bg-semi: #EEEEEECC;
+    --color-outline: #111;
+    --color-outline-semi: #00000088;
+}
+
+/* Create simple layout with a 900px max-width for content on desktop */
+.container {
+    display: grid;
+    grid-template-columns: 1fr minmax(auto, 900px) 1fr;
+}
+
+.container > * {
+    grid-column: 2;
+}
+
+.page-container {
+    min-height: calc(100vh - var(--footer-height) - var(--navbar-height));
+}
+
+.page-content {
+    border: 1px solid var(--color-outline-semi);
+    box-shadow: 5px 5px var(--color-outline-semi);
+    background: var(--color-content-bg);
+    border-radius: 0 5px 5px 5px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.page-content h1 {
+    border-bottom: 1px dotted var(--color-outline);
+}
+
+.page-content code {
+    border-bottom: 1px dashed gray;
+}
+
+.page-nav {
+    grid-column: 2;
+    box-shadow: 0 5px #eee;
+    background-color: var(--color);
+    height: var(--navbar-height);
+}
+
+.page-nav .nav-logo {
+    width: var(--logo-width);
+    height: var(--logo-height);
+    margin: 10px;
+    margin-left: auto;
+}
+
+.page-nav img {
+    max-width: 100%;
+}
+
+.page-nav ul {
+    display: flex;
+    background: var(--color-content-bg-semi);
+    margin: 0;
+    padding: 0;
+}
+
+.page-nav li {
+    list-style: none;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+    border: 1px solid var(--color-outline-semi);
+}
+
+.page-nav li.page-li--selected {
+    background: var(--color-content-bg);
+    border-bottom-width: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.page-nav-link {
+    color: var(--color-outline);
+    font-weight: bold;
+    font-size: 18px;
+    border: 3px solid var(--color-outline);
+    border-bottom-width: 4px;
+    border-top-width: 2px;
+    display: block;
+    padding: 10px;
+    border-radius: 1px 1px 3px 3px;
+    text-decoration: none;
+    transition: box-shadow 0.3s;
+    box-shadow: 
+        0 0 var(--color),
+        0 0 var(--color);
+}
+
+.page-nav-link--selected,
+.page-nav-link:hover {
+    box-shadow: 
+        var(--btn-shadow-dist) var(--btn-shadow-dist) var(--color),
+        var(--btn-shadow-dist-neg) var(--btn-shadow-dist-neg) var(--color);
+}
+
+.page-nav-link--selected {
+    background: var(--color);
+    color: white;
+}
+
+.page-nav-link--selected,
+.page-nav-link:active {
+    border-top-width: 4px;
+    border-bottom-width: 2px;
+    padding-top: 8px;
+}
+
+.page-footer {
+    height: var(--footer-height);
+    text-align: center;
+    padding-top: 30px;
+    background: var(--color-content-bg-semi);
+    color: var(--color-outline-semi);
+}
+
+.page-footer a { 
+    color: var(--color-outline-semi);
+}
+
+.article-nav li {
+    list-style: none;
+    padding: 10px;
+}
+
+.breadcrumb {
+    color: var(--color);
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin: 10px;
+    margin-left: 0;
+    display: inline-block;
+}
+
+.breadcrumb--selected {
+    color: var(--color-outline-semi);
+}
+
+/* Mobile support */
+@media (max-width: 992px) {
+    .page-nav {
+        height: auto;
+    }
+    .page-nav ul {
+        flex-wrap: wrap;
+    }
+    .page-nav li {
+        border-radius: 100px;
+    }
+    .page-content {
+        margin: -1px;
+        padding: 2px;
+        width: 100%;
+    }
+}

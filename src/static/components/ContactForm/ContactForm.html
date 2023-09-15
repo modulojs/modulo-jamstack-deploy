@@ -1,0 +1,22 @@
+{% for field in state.fields %}
+    <div class="field-pair">
+        <label for="{{ field }}_{{ component.id }}">
+            <strong>{{ field|capfirst }}:</strong>
+        </label>
+        {% if field == "text" %}
+            <textarea
+                [state.bind]
+                name="{{ field }}"
+                for="{{ field }}_{{ component.id }}"
+            ></textarea>
+        {% else %}
+            <input
+                [state.bind]
+                type="{% if state|get:field|type == 'string' %}text{% else %}checkbox{% endif %}"
+                name="{{ field }}"
+                id="{{ field }}_{{ component.id }}"
+            />
+        {% endif %}
+    </div>
+{% endfor %}
+<slot></slot>

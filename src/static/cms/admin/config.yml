@@ -1,0 +1,71 @@
+local_backend: true
+backend:
+  name: git-gateway
+  branch: main
+media_folder: "/static/cms/uploads"
+collections:
+
+  - label: "Articles"
+    label_singular: "Article"
+    name: "articles"
+    folder: "/articles/"
+    extension: "html"
+    format: "yaml-frontmatter"
+    frontmatter_delimiter: [
+        '<!DOCTYPE HTML><script Modulo src="/static/js/Modulo.js" -src="/static/cms/"></script><x-ArticlePage><script type=md>---',
+        '---',
+    ]
+    create: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Subtitle", name: "subtitle", widget: "string"}
+      - {label: "Author", name: "author", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - label: "Links & Lists"
+    label_singular: "Link"
+    name: "data_links"
+    editor:
+        preview: false
+    files:
+      - label: "Article listing"
+        name: "links_articles"
+        file: "/static/data/links/articles.json"
+        extension: "json"
+        format: "json"
+        fields:
+          - label: "Links"
+            label_singular: "Link"
+            name: "list"
+            widget: "list"
+            summary: '{{title}} ({{byline}}) - {{file}}'
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "By Line", name: "byline", widget: "string"}
+              - {label: "Read Time Estimation", name: "estimate", widget: "string"}
+              - label: "Article"
+                name: "file"
+                widget: "relation"
+                collection: "articles"
+                search_fields: [ 'slug', 'title', 'author' ]
+                value_field: '/articles/{{filename}}.{{extension}}'
+                display_fields: [ '{{slug}}: {{title}} ({{author}})' ]
+
+      - label: "Page navigation"
+        name: "links_pages"
+        file: "/static/data/links/pages.json"
+        extension: "json"
+        format: "json"
+        fields:
+          - label: "Links"
+            label_singular: "Link"
+            name: "list"
+            widget: "list"
+            fields:
+              - {label: "Title", name: "title", widget: "string"}
+              - label: "URL or file name"
+                name: "file"
+                widget: "string"
+                pattern: ['^(/|http)', "Must start with '/' (local path) or 'http' (absolute URL)" ]
+

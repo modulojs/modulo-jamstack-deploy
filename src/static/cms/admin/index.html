@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<script Modulo
+    src="/static/js/Modulo.js"
+    -src="/static/" 
+></script>
+
+<x-Page pagetitle="Decap CMS Admin Panel" navselected="admin">
+    <style>
+        /* If a password input is showing, show a hint for a common mistake */
+        #nc-root form input[type=password] + button::after {
+            display: block;
+            color: black;
+            line-height: 1.15;
+            padding: 10px;
+            content: 'HINT: For local CMS access, remember to keep "npm run startcms" running.';
+        }
+
+        /* Reset z-index to fix some graphical glitches */
+        .page-li--selected,
+        #nc-root > header {
+            z-index: 0 !important;
+        }
+    </style>
+    <div id="nc-root"></div>
+</x-Page>
+
+<!-- Finally, include netlify which will fill in #nc-root -->
+<script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>

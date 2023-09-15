@@ -1,0 +1,16 @@
+{
+    "name": "new-modulo-jamstack-app",
+    "version": "0.0.0",
+    "private": true,
+    "description": "...a new project...",
+    "scripts": {
+        "start": "npm exec -y http-server -- -p 3334 -e html src/",
+        "startcms": "cd src && npm exec -y netlify-cms-proxy-server",
+        "build": "npm install mdu.js && modulocli ssg -f"
+    },
+    "modulo": {
+        "isCopyOnly": "^static$",
+        "output": "build",
+        "input": "src"
+    }
+}

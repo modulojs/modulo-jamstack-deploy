@@ -1,0 +1,19 @@
+/* You can put site-wide settings here. These will never be prefixed and
+   instead included verbatim. Component styles will be listed after. */
+
+html {
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+}
+
+body,
+html {
+    margin: 0;
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+body * {
+    box-sizing: border-box;
+}
+

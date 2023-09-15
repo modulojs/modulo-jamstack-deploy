@@ -1,0 +1,48 @@
+<!--
+    This is the common "header" across all the pages on this site. Define more
+    components here to have them be available with an "x-" prefix, or create
+    new libraries and include them in file with <Library -src=...></Library>
+-->
+<Component name="Page" mode="vanish-into-document">
+    <Props
+        pagetitle
+        showarticles
+        navselected
+        navbreadcrumb
+    ></Props>
+    <StaticData
+        -name="links_pages"
+        -src="./data/links/pages.json"
+    ></StaticData>
+    <StaticData
+        -name="links_articles"
+        -src="./data/links/articles.json"
+    ></StaticData>
+    <Template
+        -src="./components/Page/Page.html"
+    ></Template>
+    <Style
+        -auto-isolate="vanish"
+        -src="./components/Page/Page.css"
+    ></Style>
+    <Script
+        -src="./components/Page/Page.js"
+    ></Script>
+</Component>
+
+<Component name="ContactForm" mode="vanish">
+    <!-- This ContactForm example component will update based on the state. -->
+    <State
+        name=""
+        subject=""
+        subscribe:=true
+        text="Enter your comment text here!"
+        fields:='["name", "subject", "text", "subscribe"]'
+    ></State>
+    <Template
+        -src="./components/ContactForm/ContactForm.html"
+    ></Template>
+    <Style
+        -src="./components/ContactForm/ContactForm.css"
+    ></Style>
+</Component>

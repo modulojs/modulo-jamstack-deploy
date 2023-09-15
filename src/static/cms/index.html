@@ -1,0 +1,27 @@
+<!--
+    This static header occurs across every CMS-built page, and includes extra
+    JS dependencies, along with a ArticlePage component which applies Markdown
+-->
+<Modulo -src="../"></Modulo> <!-- Start with base components (i.e. /static/) -->
+
+<script Configuration -src="https://unpkg.com/showdown/dist/showdown.min.js">
+    // Register "getMarkdownData" function, using "showdown" to convert
+    // markdown to HTML (including parsing meta data)
+    function getMarkdownData(source) {
+        const converter = new showdown.Converter({ metadata: true });
+        const html = converter.makeHtml(source);
+        const data = converter.getMetadata();
+        data.body = html; //Object.assign(String(html), { safe: true });
+        return data;
+    }
+    modulo.register('util', getMarkdownData);
+</script>
+
+<!-- Define a new ArticlePage component, which supports Markdown -->
+<Component name="ArticlePage" mode="vanish-into-document">
+    <Template -src="../components/ArticlePage/ArticlePage.html"></Template>
+    <Script
+        -src="../components/ArticlePage/ArticlePage.js"
+        -name="page"
+    ></Script>
+</Component>

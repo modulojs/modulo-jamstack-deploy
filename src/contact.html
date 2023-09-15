@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<script Modulo
+    src="/static/js/Modulo.js"
+    -src="/static/" 
+></script>
+
+<x-Page pagetitle="Contact" navselected="/contact.html">
+
+    <h1>Contact me</h1>
+
+    <p>I'm always down to hear feedback!</p>
+
+    <h2>Form</h2>
+    <p>This example text is found in <code>contact.html</code>. The
+    <code>x-ContactForm</code> component is defined in
+    <code>static/index.html</code>, while its template is found in
+    <code>static/components/ContactForm/ContactForm.html</code>.  Note that
+    this form will require a backend server to actually do anything. For
+    example, with the <code>netlify-form</code> attribute as shown below, it
+    should be ready for use with Netlify's form API.</p>
+
+    <form method="POST" netlify-form>
+        <x-ContactForm>
+            <button>Send Message &raquo;</button>
+        </x-ContactForm>
+    </form>
+
+</x-Page>
