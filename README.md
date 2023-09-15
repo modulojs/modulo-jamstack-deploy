@@ -1,14 +1,19 @@
 # Go to <https://ModuloJS.org> for the latest Modulo version and documentation
 
-----
-
-*Details:*
-
-
-
 This is a Modulo.js website created with `create-modulo`
 
-Visit <https://modulojs.org> for documentation on Modulo.js
+-----------
+
+
+## One-click Deploy
+
+### Netlify Host
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/modulo/modulo-jamstack-deploy)
+
+----
+
+# Template Details
 
 This template has Netlify's Decap CMS ready to go. This allows you and your
 teammates to upload content and commit changes with a rich text editor, without
@@ -51,6 +56,8 @@ Use the following commands:
 
 Launch your site on any web server that can host static sites, ideally one that
 can run a "build step" before serving for "server-side rendering".
+
+* [X] netlify.toml is already specified!
 
 * [ ] To publish, make sure your web-host is configured to run `npm run build`
   when code is updated, and serve the `build` directory. Some might work with
